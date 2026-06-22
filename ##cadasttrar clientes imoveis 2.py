@@ -44,25 +44,86 @@ def cadastrar_cliente():
     return Cadastro
 
 cadastros = []
+## Cadastrar novo cliente
 cadastros.append(cadastrar_cliente())
-
-print(cadastros)
 
 novo_cadastro = input("Deseja cadastrar outro cliente?").lower()
 
 while novo_cadastro in ["sim", "s"]:
     cadastros.append(cadastrar_cliente())
     novo_cadastro = input("Deseja cadastrar outro cliente?").lower()
-for cliente in cadastros:
-        print(cliente)
-        
+
 if novo_cadastro in["nao", "n", "não", "ñ"]:
     print("Cadastro concluído")
-    
+##listar clientes
+for cliente in cadastros:
+        print(cliente)
+
+##BUSCAR cliente 
 nome_busca = input("Digite o nome do cliente: ").lower()
+encontrado = False
+
 for cliente in cadastros:
     if cliente["Cliente"].lower() == nome_busca:
         print(cliente)
         encontrado =True
+        
+if encontrado == False:
+    print("Cliente não encontrado")
+        
+def editar():
+    nome_busca = input("Qual cliente deseja editar?").lower()
+    
+    encontrado = False
+
+    for cliente in cadastros:
+        if cliente["Cliente"].lower() == nome_busca:
+            encontrado = True
+            print("1 - Nome")
+            print("2 - Telefone")
+            print("3 - Email")
+            print("4 - Endereço")
+        
+            opcao = input("O que deseja editar?")
+            
+            if opcao == "1":
+                cliente["Cliente"] = input("Digite o novo nome: ")
+            elif opcao == "2":
+                cliente["Telefone"] = input("Digite o novo número: ")
+            elif opcao == "3":
+                cliente["Email"] = input("Digite um novo email: ")
+            elif opcao == "4":
+                cliente["Endereço"]= input("Digite o novo endereço: ")
+            else:
+                print("Para editar escolha entre 1, 2, 3 ou 4")
     if encontrado == False:
         print("Cliente não encontrado")
+                
+editar()
+for cliente in cadastros:
+    print(cliente)
+    
+def Excluir():
+    nome_busca = input("Qual cliente deseja excluir?").lower()
+    
+    encontrado = False
+    
+    
+    for cliente in cadastros:
+        if cliente["Cliente"].lower() == nome_busca:
+            encontrado = True
+            
+            confirma = input("Tem certeza?").lower()
+            
+            if confirma in ["s", "sim"]:
+                cadastros.remove(cliente)
+                print("Cliente removido")
+            else:
+                print("Operação cancelada")
+            
+    if encontrado == False:
+        print("Cliente não encontrado")
+    
+Excluir()
+for cliente in cadastros:
+    print(cliente)
